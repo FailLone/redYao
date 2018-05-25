@@ -1,26 +1,13 @@
 <template>
   <div id="app">
-    <banner />
-    <grid />
-    <block />
-    <list />
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Banner from '@/components/Banner';
-import Grid from '@/components/Grid';
-import Block from '@/components/Block';
-import List from '@/components/List';
 
 export default {
-  name: 'App',
-  components: {
-    Banner,
-    Grid,
-    Block,
-    List
-  }
+  name: 'App'
 };
 </script>
 
