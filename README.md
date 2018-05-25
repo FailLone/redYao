@@ -20,7 +20,7 @@ npm run build --report
 
 ## git commit 规范
 
-commit前须附带此次行为对应的emoji
+commit前须附带此次行为对应的emoji，记得及emoji后面加一个空格，eg. :tada: first commit
 
 emoji | 对应行为
 ---- | ----
