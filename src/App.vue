@@ -10,17 +10,21 @@ export default {
 </script>
 
 <style>
+@import './assets/iconfont.css';
 html {
   margin: 0;
   padding: 0;
   height: 100vh;
   box-sizing: border-box;
+  overflow: auto;;
 }
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
   background-color: #f4f4f4;
+  height: 100%;
+  overflow: auto;
 }
 * {
   box-sizing: inherit;
