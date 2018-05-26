@@ -43,8 +43,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader!postcss-loader',
-        include: [resolve('src')]
+        loader: 'style-loader!css-loader!postcss-loader!less-loader',
+        include: ['/node_modules/', resolve('src')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

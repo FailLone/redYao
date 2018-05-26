@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Homepage from '@/components/List';
-import Detail from '@/components/Block';
+import Detail from '@/components/Detail';
 
 Vue.use(Router)
 
