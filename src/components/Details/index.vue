@@ -2,7 +2,9 @@
     <div>
         <comp-filter />
         <div flexcontainer class="container">
-            <comp-item  v-for="(item, index) in course" :key="index" :data="item"/>
+            <router-link to="/detail" v-for="(item, index) in course" :key="index" >
+                <comp-item  :data="item"/>
+            </router-link>
         </div>
     </div>
 </template>

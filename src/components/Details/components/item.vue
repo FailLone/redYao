@@ -70,6 +70,7 @@ export default {
         justify-content: center;
         flex-direction: column;
         font-size: 32px;
+        color: #000000
     }
     .name {
         margin-left: 20px;
