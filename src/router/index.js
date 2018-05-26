@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Homepage from '@/components/List';
-import Detail from '@/components/Detail';
+import Detail from '@/components/Detail'
+import Homepage from '@/components/Homepage'
+import Details from '@/components/Details'
 
 Vue.use(Router)
 
@@ -14,7 +15,7 @@ export default new Router({
     }, {
       path: '/details',
       name: 'Details',
-      component: () => import('@/components/Grid')
+      component: Details
     }, {
       path: '/detail',
       name: 'Detail',
