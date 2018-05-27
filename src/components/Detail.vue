@@ -88,7 +88,8 @@ export default {
     let supportEventPassive = this._isSupportPassive() ? { passive: true } : false;
     let self = this
     document.body.addEventListener('scroll', this._throttle(function () {
-      if (document.body.scrollTop > 100) {
+      let st = document.documentElement.scrollTop || document.body.scrollTop || Math.abs(document.querySelector('.detail-wrapper').getBoundingClientRect().top)
+      if (st > 100) {
         self.backTopShow = true
       } else {
         self.backTopShow = false
