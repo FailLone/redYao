@@ -87,7 +87,7 @@ export default {
     this._initRAF()
     let supportEventPassive = this._isSupportPassive() ? { passive: true } : false;
     let self = this
-    document.body.addEventListener('scroll', this._throttle(function () {
+    window.onscroll = this._throttle(function () {
       let st = document.documentElement.scrollTop || document.body.scrollTop || Math.abs(document.querySelector('.detail-wrapper').getBoundingClientRect().top)
       if (st > 100) {
         self.backTopShow = true
@@ -97,7 +97,7 @@ export default {
     }, 20, {
       leading: true,
       trailing: false
-    }), supportEventPassive)
+    })
   },
   methods: {
     backTop: () => {
@@ -108,7 +108,12 @@ export default {
           distance = 0
         }
         distance = distance - step
-        document.body.scrollTop = distance
+        if (document.documentElement.scrollTop) {
+          document.documentElement.scrollTop = distance
+        } else {
+          document.body.scrollTop = distance
+        }
+        
         if (distance > 0) {
           window.requestAnimationFrame(stepFn);
         }

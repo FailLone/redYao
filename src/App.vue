@@ -23,7 +23,6 @@ body {
   padding: 0;
   min-height: 100vh;
   background-color: #f4f4f4;
-  height: 100%;
   overflow: auto;
 }
 * {
