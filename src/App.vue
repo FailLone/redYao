@@ -22,7 +22,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: #f4f4f4;
+  background-color: #eeeaf8;
   overflow: auto;
 }
 * {

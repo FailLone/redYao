@@ -2,9 +2,7 @@
     <div>
         <comp-filter />
         <div flexcontainer class="container">
-            <router-link to="/detail" v-for="(item, index) in course" :key="index" >
-                <comp-item  :data="item"/>
-            </router-link>
+                <comp-item  :data="item" v-for="(item, index) in course" :key="index" />
         </div>
     </div>
 </template>
@@ -27,8 +25,6 @@ export default {
                 v => (grade === '全部年级' || grade === v.grade)
                 && (project === '全部科目' || project === v.project)
                 && (time === '开课时间' || time === v.month)
-            ).sort(
-                (a, b) => order === '排序' || order === '按热门程度' || a.order - b.order
             )
         }
     }

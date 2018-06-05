@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>姚洪教育</title>
+    <title>Hust</title>
     <script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
   </head>
   <body>
@@ -11,6 +11,11 @@
     <!-- built files will be auto injected -->
     <script>
         window.onload = function () {
+          if (location.hash === '#/teacher') {
+            document.title = '师资力量'
+          } else {
+            document.title = 'Hust'
+          }
           window.viewportUnitsBuggyfill.init({
             hacks: window.viewportUnitsBuggyfillHacks
           });

@@ -1,27 +1,24 @@
 <template>
-    <div w-650-350 aspectratio class="item-container">
-        <div aspectratio-content>
-            <img :src="src">
-            <div class="course-container" flexcontainer>
-                <div flexcontainer class="content">
-                    <div class="name">
-                        {{name}}
-                    </div>
-                    <div class="time">
-                        <span>
-                            {{data.time}}
-                        </span>
-                        <span>
-                            {{data.period}}课时
-                        </span>
-                    </div>
-                </div>
-                <div flexcontainer class="price">
-                    <span>
-                        ¥ {{data.price}}
-                    </span>
-                </div>
-            </div>
+    <div class="item-container">
+        <img :src="backgroundSrc">
+        <div class="bottom">
+            <img src="../../../assets/bottom.png">
+        </div>
+        <router-link to='/detail'>
+            <img :src="searchSrc" class="search">
+        </router-link>
+        <img :src="src" class="project">
+        <div class="title">
+            {{name}}
+        </div>
+        <div class="price title">
+            ¥{{data.price}}
+        </div>
+        <div class="information">
+            {{data.time}}
+        </div>
+        <div class="information period">
+            {{data.period}}课时
         </div>
     </div>
 </template>
@@ -33,7 +30,13 @@ export default {
     props: ['data'],
     computed: {
         src() {
-            return require(`../../../assets/${this.data.project}.jpg`)
+            return require(`../../../assets/${this.data.project}.png`)
+        },
+        backgroundSrc() {
+            return require(`../../../assets/${this.data.style}-back.png`)
+        },
+        searchSrc() {
+            return require(`../../../assets/${this.data.style}-search.png`)
         },
         name() {
             return this.data.grade + this.data.project + this.data.name
@@ -42,57 +45,55 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
     .item-container {
-        margin: 30px 0;
-        border: 1px solid #cecece;
-        border-radius: 10px;
+        margin: 25px 30px;
+        text-align: center;
+        position: relative;
+        .bottom {
+            width: 85%;
+            top: -16px;
+            display: inline-block;
+            position: relative;
+        }
+        .search {
+            position: absolute;
+            width: 13%;
+            bottom: 40px;
+            right: 3.5%;
+        }
+        .project {
+            position: absolute;
+            width: 26%;
+            right: 4%;
+            top: -25px;
+        }
+        .title {
+            position: absolute;
+            top: 68px;
+            left: 90px;
+            color: #ffffff;
+            font-size: 28px;
+            letter-spacing: 3px;
+            &.price {
+                top: 120px;
+                letter-spacing: 1px;
+                left: 190px;
+            }
+        }
+        .information {
+            position: absolute;
+            bottom: 35px;
+            left: 115px;
+            color: #666666;
+            font-size: 25px;
+            &.period {
+                left: 460px;
+            }
+        }
     }
-    .item-container img {
-        width: 100%;
-        height: 60%;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
-    [w-650-350] {
-        width: 650px;
-    }
-    [w-650-350] {
-        aspect-ratio:'650:350';
-    }
-    .course-container {
-        height: 40%;
-        width: 100%;
-    }
-    .content {
-        width: 70%;
-        height: 100%;
-        justify-content: center;
-        flex-direction: column;
-        font-size: 32px;
-        color: #000000
-    }
-    .name {
-        margin-left: 20px;
-        font-size: 30px;
-        margin-bottom: 10px;
-    }
-    .time {
-        white-space: nowrap;
-    }
-    .content span {
-        font-size: 18px;
-        border: 1px solid #cecece;
-        border-radius: 10px;
-        padding: 2px;
-        margin-left: 20px;
-    }
-    .price {
-        color: #FF9900;
-        font-size: 32px;
-        width: 30%;
-        height: 100%;
-        align-items: center;
+    .item-container:first-child {
+        margin-top: 50px;
     }
 </style>
 

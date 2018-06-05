@@ -6,7 +6,7 @@
                     {{state.grade}}
                 </span>
                 <i class="iconfont">
-                    &#xe64b;
+                    &#xe6c6;
                 </i>
             </div>
             <div class="item"  v-on:click="changeVisible('project')">
@@ -14,7 +14,7 @@
                     {{state.project}}
                 </span>
                 <i class="iconfont">
-                    &#xe64b;
+                    &#xe6c6;
                 </i>
             </div>
             <div class="item"  v-on:click="changeVisible('time')">
@@ -22,33 +22,22 @@
                     {{state.time}}
                 </span>
                 <i class="iconfont">
-                    &#xe64b;
-                </i>
-            </div>
-            <div class="item"  v-on:click="changeVisible('order')">
-                <span>
-                    {{state.order}}
-                </span>
-                <i class="iconfont">
-                    &#xe64b;
+                    &#xe6c6;
                 </i>
             </div>
         </div>
-        <mt-actionsheet
-            :actions="currentoption"
-            v-model="sheetVisible"
-        >
-        </mt-actionsheet>
+        <comp-filtercontent :options="currentoption" :visibility="sheetVisible" :value="currentvalue" :close="close" />
     </div>
 </template>
 
 <script>
-import { Actionsheet } from 'mint-ui'
-import Vue from 'vue'
+import compFiltercontent from './filterContent'
 
-Vue.component(Actionsheet.name, Actionsheet)
 export default {
     name: "comp-filter",
+    components: {
+        compFiltercontent
+    },
     data() {
         return {
             options: {
@@ -69,7 +58,7 @@ export default {
                     name: '全部科目',
                     method: () => this.$store.commit('changeProject', '全部科目')
                 }, {
-                    name: '语文',
+                    name: '物理',
                     method: () => this.$store.commit('changeProject', '语文')
                 }, {
                     name: '数学',
@@ -77,6 +66,27 @@ export default {
                 }, {
                     name: '英语',
                     method: () => this.$store.commit('changeProject', '英语')
+                }, {
+                    name: '化学',
+                    method: () => this.$store.commit('changeProject', '化学')
+                }, {
+                    name: '生物',
+                    method: () => this.$store.commit('changeProject', '生物')
+                }, {
+                    name: '人工智能',
+                    method: () => this.$store.commit('changeProject', '人工智能')
+                }, {
+                    name: 'Python入门',
+                    method: () => this.$store.commit('changeProject', 'Python入门')
+                }, {
+                    name: '区块链',
+                    method: () => this.$store.commit('changeProject', '区块链')
+                }, {
+                    name: '大数据分析',
+                    method: () => this.$store.commit('changeProject', '大数据分析')
+                }, {
+                    name: '心理辅导',
+                    method: () => this.$store.commit('changeProject', '心理辅导')
                 }],
                 time: [{
                     name: '开课时间',
@@ -87,26 +97,28 @@ export default {
                 }, {
                     name: '8月开课',
                     method: () => this.$store.commit('changeTime', '8月开课')
-                }],
-                order: [{
-                    name: '排序',
-                    method: () => this.$store.commit('changeOrder', '排序')
-                }, {
-                    name: '按开课时间',
-                    method: () => this.$store.commit('changeOrder', '按开课时间')
-                }, {
-                    name: '按热门程度',
-                    method: () => this.$store.commit('changeOrder', '按热门程度')
                 }]
             },
             currentoption: [],
+            currentvalue: '',
+            currentfilter: '',
             sheetVisible: false
         }
     },
     methods: {
         changeVisible(v) {
+            if (v === this.currentfilter && this.sheetVisible) {
+                this.sheetVisible = false
+                this.currentfilter = ''
+                return
+            }
             this.sheetVisible = true
+            this.currentfilter = v
             this.currentoption = this.options[v]
+            this.currentvalue = this.state[v]
+        },
+        close() {
+            this.sheetVisible = false
         }
     },
     computed: {
@@ -126,7 +138,7 @@ export default {
         z-index: 1;
     }
     .item {
-        width: 25%;
+        width: 100%;
         height: 65px;
         border: 1px solid #cecece;
         background-color: #fff;
@@ -142,9 +154,11 @@ export default {
         overflow: hidden;
         width: 80%;
         text-align: center;
+        letter-spacing: 1px;
     }
     .item i {
         width: 20%;
+        color: #bebebe;
     }
 </style>
 
