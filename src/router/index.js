@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/details',
@@ -20,3 +20,14 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, _, next) => {
+  if (to.path === '/teacher') {
+    document.title = '师资力量'
+  } else {
+    document.title = 'Hust'
+  }
+  next()
+})
+
+export default router
