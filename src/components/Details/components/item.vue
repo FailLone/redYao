@@ -1,26 +1,26 @@
 <template>
-    <div class="item-container">
-        <img :src="backgroundSrc">
-        <div class="bottom">
-            <img src="../../../assets/bottom.png">
+    <router-link to='/detail'>
+        <div class="item-container">
+            <img :src="backgroundSrc">
+            <div class="bottom">
+                <img src="../../../assets/bottom.png">
+            </div>
+                <img :src="searchSrc" class="search">
+            <img :src="src" class="project">
+            <div class="title">
+                {{name}}
+            </div>
+            <div class="price title">
+                ¥{{data.price}}
+            </div>
+            <div class="information">
+                {{data.time}}
+            </div>
+            <div class="information period">
+                {{data.period}}课时
+            </div>
         </div>
-        <router-link to='/detail'>
-            <img :src="searchSrc" class="search">
-        </router-link>
-        <img :src="src" class="project">
-        <div class="title">
-            {{name}}
-        </div>
-        <div class="price title">
-            ¥{{data.price}}
-        </div>
-        <div class="information">
-            {{data.time}}
-        </div>
-        <div class="information period">
-            {{data.period}}课时
-        </div>
-    </div>
+    </router-link>
 </template>
 
 
@@ -47,7 +47,7 @@ export default {
 
 <style scoped lang="less">
     .item-container {
-        margin: 25px 30px;
+        margin: 25px 30px 0px 30px;
         text-align: center;
         position: relative;
         .bottom {

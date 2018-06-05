@@ -4,7 +4,7 @@
         <img src="../../assets/banner.png">
     </div>
     <div class="header section">
-      <div class="course-name">{{course.name}}&nbsp;&nbsp;| &nbsp;{{course.time}}课时</div>
+      <div class="course-name">{{course.name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{course.time}}课时</div>
     </div>
     <div class="info section">
       <div class="title">课程信息</div>
@@ -12,8 +12,7 @@
           <div class="infowrapper">
             <img class="font" src="../../assets/time.png">
             <div class="label time">开课时间</div>
-            <div class="value time">{{courseTime[1]}}</div>
-            <div class="value date">{{courseTime[0]}}</div>
+            <div class="value time">{{courseTime[1]}}&nbsp;&nbsp;&nbsp;{{courseTime[0]}}</div>
           </div>
           <div class="infowrapper">
             <img class="font" src="../../assets/location.png">

@@ -60,7 +60,7 @@ export default {
             }
 
             li {
-                font-size: 14px;
+                font-size: 23px;
                 padding: 15px 0;
                 border-bottom: solid 1px #eee;
                 &.active {
@@ -68,6 +68,9 @@ export default {
                 }
                 & .iconfont {
                     float: right;
+                }
+                i {
+                    font-size: 23px;
                 }
             }
         }

@@ -146,7 +146,7 @@ export default {
         justify-content: center;
         align-items: center;
         padding: 5px;
-        font-size: 17px;
+        font-size: 25px;
     }
     .item span {
         text-overflow: ellipsis;
@@ -159,6 +159,7 @@ export default {
     .item i {
         width: 20%;
         color: #bebebe;
+        font-size: 25px;
     }
 </style>
 
