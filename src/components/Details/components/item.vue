@@ -1,6 +1,14 @@
 <template>
-    <router-link to='/detail'>
+    <router-link :to="{ path: 'detail', query: {data: data} }">
         <div class="item-container">
+            <div class="top">
+                <div class="background">
+                    
+                </div>
+                <div class="text">
+                    <span>{{data.grade}}</span>
+                </div>
+            </div>
             <img :src="backgroundSrc">
             <div class="bottom">
                 <img src="../../../assets/bottom.png">
@@ -8,10 +16,10 @@
                 <img :src="searchSrc" class="search">
             <img :src="src" class="project">
             <div class="title">
-                {{name}}
+                {{data.name}}
             </div>
             <div class="price title">
-                ¥{{data.price}}
+                {{data.price}}
             </div>
             <div class="information">
                 {{data.time}}
@@ -30,16 +38,13 @@ export default {
     props: ['data'],
     computed: {
         src() {
-            return require(`../../../assets/${this.data.project}.png`)
+            return require(`../../../assets/${this.data.name}.png`)
         },
         backgroundSrc() {
             return require(`../../../assets/${this.data.style}-back.png`)
         },
         searchSrc() {
             return require(`../../../assets/${this.data.style}-search.png`)
-        },
-        name() {
-            return this.data.grade + this.data.project + this.data.name
         }
     }
 }
@@ -50,6 +55,35 @@ export default {
         margin: 25px 30px 0px 30px;
         text-align: center;
         position: relative;
+        .top {
+            position: absolute;
+            left: 26px;
+            top: 7px;
+            font-size: 12px;
+            color: #666666;
+            .background {
+                    position: absolute;
+                    left: 0px;
+                    top: -13px;
+                    width: 162px;
+                    height: 45px;
+                    background: inherit;
+                    background-color: rgba(255, 255, 255, 1);
+                    border: none;
+                    border-radius: 15px;
+                    box-shadow: none;
+                    font-size: 12px;
+                    color: #666666;
+            }
+            .text {
+                position: relative;
+                left: 30px;
+                top: -4px;
+                width: 98px;
+                word-wrap: break-word;
+                font-size: 20px;
+            }
+        }
         .bottom {
             width: 85%;
             top: -16px;
@@ -71,14 +105,17 @@ export default {
         .title {
             position: absolute;
             top: 68px;
-            left: 90px;
+            left: 60px;
             color: #ffffff;
             font-size: 28px;
             letter-spacing: 3px;
             &.price {
+                font-size: 20px;
                 top: 120px;
+                left: 70px;
                 letter-spacing: 1px;
-                left: 190px;
+                max-width: 415px;
+                text-align: left;
             }
         }
         .information {

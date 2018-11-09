@@ -1,5 +1,10 @@
 <template>
     <div>
+        <mt-search
+            v-model="value"
+            cancel-text=""
+            placeholder="搜索">
+        </mt-search>
         <div flexcontainer>
             <div class="item" v-on:click="changeVisible('grade')">
                 <span>
@@ -42,61 +47,58 @@ export default {
         return {
             options: {
                 grade: [{
-                    name: '全部年级',
-                    method: () => this.$store.commit('changeGrade', '全部年级')
+                    name: '年龄',
+                    method: () => this.$store.commit('changeGrade', '年龄')
                 }, {
-                    name: '初一',
-                    method: () => this.$store.commit('changeGrade', '初一')
+                    name: '5-10 岁',
+                    method: () => {
+                        this.$store.commit('changeGrade', '5-10 岁')
+                        this.$store.commit('changeProject', '思维启蒙初级')
+                    }
                 }, {
-                    name: '初二',
-                    method: () => this.$store.commit('changeGrade', '初二')
+                    name: '8-13 岁',
+                    method: () => {
+                        this.$store.commit('changeGrade', '8-13 岁')
+                        this.$store.commit('changeProject', '技能进阶中级')
+                    }
                 }, {
-                    name: '初三',
-                    method: () => this.$store.commit('changeGrade', '初三')
+                    name: '10-15 岁',
+                    method: () => {
+                        this.$store.commit('changeGrade', '10-15 岁')
+                        this.$store.commit('changeProject', '发明探索高级')
+                    }
                 }],
                 project: [{
-                    name: '全部科目',
-                    method: () => this.$store.commit('changeProject', '全部科目')
+                    name: '课程',
+                    method: () => this.$store.commit('changeProject', '课程')
                 }, {
-                    name: '物理',
-                    method: () => this.$store.commit('changeProject', '语文')
+                    name: '思维启蒙初级',
+                    method: () => {
+                        this.$store.commit('changeGrade', '5-10 岁')
+                        this.$store.commit('changeProject', '思维启蒙初级')
+                    }
                 }, {
-                    name: '数学',
-                    method: () => this.$store.commit('changeProject', '数学')
+                    name: '技能进阶中级',
+                    method: () => {
+                        this.$store.commit('changeGrade', '8-13 岁')
+                        this.$store.commit('changeProject', '技能进阶中级')
+                    }
                 }, {
-                    name: '英语',
-                    method: () => this.$store.commit('changeProject', '英语')
-                }, {
-                    name: '化学',
-                    method: () => this.$store.commit('changeProject', '化学')
-                }, {
-                    name: '生物',
-                    method: () => this.$store.commit('changeProject', '生物')
-                }, {
-                    name: '人工智能',
-                    method: () => this.$store.commit('changeProject', '人工智能')
-                }, {
-                    name: 'Python入门',
-                    method: () => this.$store.commit('changeProject', 'Python入门')
-                }, {
-                    name: '区块链',
-                    method: () => this.$store.commit('changeProject', '区块链')
-                }, {
-                    name: '大数据分析',
-                    method: () => this.$store.commit('changeProject', '大数据分析')
-                }, {
-                    name: '心理辅导',
-                    method: () => this.$store.commit('changeProject', '心理辅导')
+                    name: '发明探索高级',
+                    method: () => {
+                        this.$store.commit('changeGrade', '10-15 岁')
+                        this.$store.commit('changeProject', '发明探索高级')
+                    }
                 }],
                 time: [{
-                    name: '开课时间',
-                    method: () => this.$store.commit('changeTime', '开课时间')
+                    name: '排序',
+                    method: () => this.$store.commit('changeTime', '排序')
                 }, {
-                    name: '7月开课',
-                    method: () => this.$store.commit('changeTime', '7月开课')
+                    name: '按进阶推荐',
+                    method: () => this.$store.commit('changeTime', '按进阶推荐')
                 }, {
-                    name: '8月开课',
-                    method: () => this.$store.commit('changeTime', '8月开课')
+                    name: '按热门程度',
+                    method: () => this.$store.commit('changeTime', '按热门程度')
                 }]
             },
             currentoption: [],
@@ -124,17 +126,20 @@ export default {
     computed: {
         state() {
             return this.$store.state.details
+        },
+        value() {
+            return this.$store.state.search
         }
     }
 }
 </script>
 
 
-<style scoped>
+<style scoped lang="less">
     [flexcontainer] {
         justify-content: center;
         position: fixed;
-        top: 0;
+        top: 76px;
         z-index: 1;
     }
     .item {
@@ -162,4 +167,28 @@ export default {
         font-size: 25px;
     }
 </style>
+<style lang="less">
+.mint-search {
+        height: auto;
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+        top: 0;
+        .mint-searchbar {
+            background-color: #fff;
+            padding: 10px 16px;
+        }
+
+        .mint-searchbar-inner {
+            border-radius: 8px;
+            height: 60px;
+            background-color: #eeeaf8;
+            input {
+                background-color: #eeeaf8;
+                width: 80%;
+            }
+        }
+    }
+</style>
+
 

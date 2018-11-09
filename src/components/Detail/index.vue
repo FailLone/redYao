@@ -4,7 +4,7 @@
         <img src="../../assets/banner.png">
     </div>
     <div class="header section">
-      <div class="course-name">{{course.name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{course.time}}课时</div>
+      <div class="course-name">{{course.name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{course.period}}课时</div>
     </div>
     <div class="info section">
       <div class="title">课程信息</div>
@@ -12,33 +12,43 @@
           <div class="infowrapper">
             <img class="font" src="../../assets/time.png">
             <div class="label time">开课时间</div>
-            <div class="value time">{{courseTime[1]}}&nbsp;&nbsp;&nbsp;{{courseTime[0]}}</div>
+            <div class="value time">{{course.time}}</div>
+            <div class="value hours">周中 17:00-18:00</div>
+            <div class="value hours">周末 10:00-11:00</div>
           </div>
           <div class="infowrapper">
             <img class="font" src="../../assets/location.png">
             <div class="label time">上课地点</div>
-            <div class="value time">{{course.location}}</div>
+            <div class="value time">海秀中路71号海垦广场B503</div>
           </div>
           <div>
             <img class="font" src="../../assets/teacher.png">
             <div class="label time">授课老师</div>
-            <div class="value time">{{course.teacherLabel}}  {{course.teacher}}</div>
+            <div class="value time">北京航空航天大学  吴灿烽</div>
+            <div class="value hours">华中科技大学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;李天豪</div>
+            <div class="value hours">华中科技大学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;黄奔</div>
           </div>
       </div>
     </div>
     <div class="desc section">
       <div class="title">课程简介</div>
       <div class="content">{{course.desc}}</div>
+      <div class="content second">{{course.desc1}}</div>
     </div>
     <div class="stu-info section">
       <div class="title">适用学员</div>
       <div class="content">{{course.stuInfo}}</div>
+      <div class="content second">{{course.stuInfo1}}</div>
     </div>
     <div class="character-item section" v-for="(item,index) in course.character" :key="index">
-        <i></i><span>{{item}}</span>
+        <i></i><span class="inner">{{item}}</span><span class="fix"></span>
     </div>
     <div class="bottom">
-      <span class="price">总计: ¥{{course.price}}</span>
+      <div class="price">
+      <span class="first">原价¥{{course.money[0]}}</span>
+      <span>¥ {{course.money[1]}}/课时</span>
+      <span class="second">组团最低可获: ¥{{course.money[2]}}/课时</span>
+      </div>
       <a class="tel" :href="'tel:' + course.tel">电话预约</a>
     </div>
     <div v-show="backTopShow" class="backtop iconfont" @click="backTop">&#xe61d;</div>
@@ -49,32 +59,28 @@ export default {
   name: "detail",
   data: () => {
     return {
-      course: {
-        name: "初一物理暑期强化A班",
-        time: "15",
-        startTime: 1529028000,
-        endTime: 1530416700,
-        teacher: "江小白",
-        teacherLabel: "清华硕士",
-        location: "龙华区大同路26号万国都会写字楼",
-        desc: "这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介",
-        stuInfo: '这里是适用学员——心怀宇宙的初中生心怀宇宙的初中生心怀宇宙的初中生心怀宇宙的初中生心怀宇宙的初中生',
-        character: [
-          '这里是课程简这里是课程简特色', '这里是课程简这里是课程简特色', '这里是课程简这里是课程简特色', '这里是课程简这里是课程简特色'
-        ],
-        price: 3400,
-        tel: 12312412
-      },
+      // course: {
+      //   name: "初一物理暑期强化A班",
+      //   time: "15",
+      //   startTime: 1529028000,
+      //   endTime: 1530416700,
+      //   teacher: "江小白",
+      //   teacherLabel: "清华硕士",
+      //   location: "龙华区大同路26号万国都会写字楼",
+      //   desc: "这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介这里是课程简介",
+      //   stuInfo: '这里是适用学员——心怀宇宙的初中生心怀宇宙的初中生心怀宇宙的初中生心怀宇宙的初中生心怀宇宙的初中生',
+      //   character: [
+      //     '这里是课程简这里是课程简特色', '这里是课程简这里是课程简特色', '这里是课程简这里是课程简特色', '这里是课程简这里是课程简特色'
+      //   ],
+      //   price: 3400,
+      //   tel: 12312412
+      // },
       backTopShow: false
     }
   },
   computed: {
-    courseTime() {
-      let s = new Date(this.course.startTime * 1000)
-      let e = new Date(this.course.endTime * 1000)
-      let lessonTime = '' + s.getHours() + ':' + e.getMinutes() + '-' + e.getHours() + ':' +  e.getMinutes()
-      let duration = '' + [s.getFullYear(), s.getMonth(), s.getDate()].join('.') + ' - ' + [e.getFullYear(), e.getMonth(), e.getDate()].join('.')
-      return [lessonTime, duration]
+    course() {
+      return this.$route.query.data
     }
   },
   mounted() {
@@ -82,7 +88,7 @@ export default {
     let supportEventPassive = this._isSupportPassive() ? { passive: true } : false;
     let self = this
     window.onscroll = this._throttle(function () {
-      let st = document.documentElement.scrollTop || document.body.scrollTop || Math.abs(document.querySelector('.detail-wrapper').getBoundingClientRect().top)
+      let st = document.documentElement.scrollTop || document.body.scrollTop || document.querySelector('.detail-wrapper') && Math.abs(document.querySelector('.detail-wrapper').getBoundingClientRect().top)
       if (st > 100) {
         self.backTopShow = true
       } else {
@@ -236,6 +242,9 @@ export default {
     line-height: 40px;
     letter-spacing: 3px;
     color: #666666;
+    &.second {
+      margin-top: 15px;
+    }
     .font {
       width: 25px;
       vertical-align: sub;
@@ -250,6 +259,9 @@ export default {
     .time {
       display: inline-block;
     }
+    .hours {
+      margin-left: 180px;
+    }
     .date {
       margin-left: 177px;
     }
@@ -258,26 +270,37 @@ export default {
   .character-item {
     border-top-left-radius: 60px;
     border-bottom-left-radius: 60px;
-    height: 120px;
     padding-top: 30px;
+    // position: relative;
     i {
       width: 60px;
       height: 60px;
       display: inline-block;
+      position: absolute;
       border-radius: 50%;
       border: solid 1px #eee;
       background-size: 40px 30px;
       box-shadow: 0 2px 8px rgba(0,0,0,.09);
       background-repeat: no-repeat;
       background-position: center;
-      background-image: url('../../assets/feature.png')
+      background-image: url('../../assets/feature.png');
+      vertical-align: middle;
     }
-    span {
-      position: relative;
-      top: -20px;
-      left: 30px;
+    .inner {
+      margin-left: 70px;
+      vertical-align: middle;
+      text-align: left;
       letter-spacing: 3px;
       color: #666666;
+      display: inline-block;
+    }
+    .fix {
+        display: inline-block;
+        width: 0;
+        height: 60px;
+        line-height: 60px;
+        vertical-align: middle;
+        visibility: hidden;
     }
   }
 
@@ -293,10 +316,29 @@ export default {
     height: 120px;
     line-height: 120px;
     display: inline-block;
+    position: relative;
+    width: 100%;
     color: #ff8672;
     font-size: 28px;
-    margin-left: 40px;
+    margin-left: 120px;
     letter-spacing: 1px;
+    span {
+      position: absolute;
+      top: -10px;
+      left: 45px;
+    }
+    .first {
+      font-size: 14px;
+      left: -100px;
+      top: -30px;
+      text-decoration: line-through;
+      color: #777777;
+    }
+    .second {
+      font-size: 14px;
+      top: 20px;
+      left: 0;
+    }
   }
   .tel {
     width: 180px;

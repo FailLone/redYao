@@ -22,10 +22,10 @@ export default {
             const {grade, project, time, order, course} = this.$store.state.details
 
             return course.filter(
-                v => (grade === '全部年级' || grade === v.grade)
-                && (project === '全部科目' || project === v.project)
-                && (time === '开课时间' || time === v.month)
-            )
+                v => (grade === '年龄' || grade === v.grade)
+                && (project === '课程' || project === v.project)
+            ).sort((a, b) => time === '按热门程度' ? b.weight - a.weight : a.weight - b.weight)
+            return course
         }
     }
 }
@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
     .container {
-        margin-top: 65px;
+        margin-top: 125px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
